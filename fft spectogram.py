@@ -1,6 +1,5 @@
 import numpy as np
 import matplotlib.pyplot as plt
-
 #constants
 sampling_rate = 1 #Hz
 N = 100  #amount of samples
@@ -21,5 +20,6 @@ t = np.arange(sampling_rate/-2, sampling_rate/2, sampling_rate/N)
 plt.plot(t,fftmag,".-")
 plt.axis([-(sampling_rate/2+margin), sampling_rate/2+margin,-1, max(fftmag)*1.1])
 plt.ylabel("Magnitude")
-plt.xlabel("Time")
+plt.xlabel("Time(s)")
 plt.show()
+
