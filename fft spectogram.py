@@ -1,25 +1,26 @@
 import numpy as np
 import matplotlib.pyplot as plt
+
 #constants
 sampling_rate = 1 #Hz
-N = 100  #amount of samples
-t = np.arange(N)
-margin = sampling_rate/N
+window_size = 100  #amount of samples/window size
 
-#wave creation
-#frequency = 0.15
-#wave = np.sin(frequency*2*np.pi*t)
+overlap = 0.5 #overlap between windows in percent
+step = window_size-int(window_size*overlap) #step size between windows
+
+num_windows = int((len(t)-window_size/step)+1
+
+spectogram = []
 
 #fft
-fft = np.fft.fftshift(np.fft.fft(wave*np.hamming(N)))
-fftmag = np.abs(fft)
-fftangle = np.angle(fft)
+for i in range(num_windows):
+    start = i*step
+    end = start+window_size
+    segment = wave[start:end]   
 
-#plotting
-t = np.arange(sampling_rate/-2, sampling_rate/2, sampling_rate/N)
-plt.plot(t,fftmag,".-")
-plt.axis([-(sampling_rate/2+margin), sampling_rate/2+margin,-1, max(fftmag)*1.1])
-plt.ylabel("Magnitude")
-plt.xlabel("Time(s)")
-plt.show()
+    fft = np.fft.fftshift(np.fft.fft(segment*np.hamming(window_size)))
+    
+    fftmag = np.abs(fft)
+    fftangle = np.angle(fft)
 
+    spectogram.append(fftmag)
