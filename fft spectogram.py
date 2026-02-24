@@ -2,13 +2,14 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 #constants
-sampling_rate = 1 #Hz
+sampling_rate = 1000 #Hz
 window_size = 100  #amount of samples/window size
+t = np.arange(0, 1, 1/sampling_rate) #time vector of 1 second
 
 overlap = 0.5 #overlap between windows in percent
 step = window_size-int(window_size*overlap) #step size between windows
 
-num_windows = int((len(t)-window_size/step)+1
+num_windows = int((len(t)-window_size/step)+1)
 
 spectogram = []
 
